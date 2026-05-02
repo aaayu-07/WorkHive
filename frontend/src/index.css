@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: var(--color-primary-base);
+  --color-primary-light: var(--color-primary-light);
+  --color-secondary: var(--color-secondary-base);
+  
+  --color-background: var(--color-bg);
+  --color-surface: var(--color-surface-bg);
+  
+  --color-text-primary: var(--color-text-main);
+  --color-text-secondary: var(--color-text-muted);
+
+  --color-border: var(--color-border-color);
+  
+  /* Linear-style rounded corners */
+  --radius-xl: 1rem;
+}
+
+@layer base {
+  :root {
+    --color-primary-base: #2F7E79; /* Deep Teal */
+    --color-primary-light: #3E8F89; /* Hover Teal */
+    --color-primary-dark: #256864; /* Active Teal */
+    --color-secondary-base: #637C92; /* Muted Blue */
+
+    --color-bg: #F9FAFA; /* Soft off-white */
+    --color-surface-bg: #FFFFFF; /* Base surface */
+
+    --color-text-main: #1E293B; /* Deep charcoal */
+    --color-text-muted: #64748B; /* Cool gray */
+
+    --color-border-color: rgba(15, 23, 42, 0.05); /* Soft border/shadow */
+  }
+
+  .dark {
+    --color-primary-base: #2F7E79;
+    --color-primary-light: #3E8F89;
+    --color-primary-dark: #256864;
+    --color-secondary-base: #6D8196;
+
+    --color-bg: #090B0D; /* Deep Base Charcoal */
+    --color-surface-bg: rgba(255, 255, 255, 0.03); /* Glass Surface */
+
+    --color-text-main: #E6EDF3; /* Primary */
+    --color-text-muted: #9BA8B4; /* Secondary */
+
+    --color-border-color: rgba(255, 255, 255, 0.06); /* Subtle Glass Border */
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+    font-family: 'Inter', 'Poppins', sans-serif;
+    @apply transition-colors duration-300;
+  }
+
+  .dark body {
+    background: radial-gradient(circle at top center, rgba(47, 126, 121, 0.04) 0%, transparent 50%),
+                linear-gradient(135deg, #090B0D 0%, #151A21 100%);
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  /* ── Light Mode Surface ── */
+  :root .bg-\[var\(--color-surface\)\] {
+    background: #FFFFFF !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06) !important;
+  }
+
+  /* ── Dark Mode Surface (glass) ── */
+  .dark .bg-\[var\(--color-surface\)\] {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.07) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+  }
+
+  /* ── Primary Button Depth ── */
+  .bg-\[var\(--color-primary-base\)\] {
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary-base)) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 2px 8px rgba(47, 126, 121, 0.3) !important;
+    transition: all 0.2s ease-in-out !important;
+  }
+
+  .bg-\[var\(--color-primary-base\)\]:hover,
+  .hover\:bg-\[var\(--color-primary-light\)\]:hover {
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary-dark)) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 4px 14px rgba(47, 126, 121, 0.4) !important;
+    transform: scale(1.02) !important;
+  }
+}
+
+/* Custom Scrollbar for a premium feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
